@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import EmployeeService from '../services/EmployeeService';
+import FooterComponent from './FooterComponent';
 
 export default class CreateEmployeeComponent extends Component {
 
@@ -15,13 +16,13 @@ export default class CreateEmployeeComponent extends Component {
     }
 
     saveEmployee = (e) => {
-        e.preventDefault();
         let employee = {firstName: this.state.firstName, lastName: this.state.lastName,
             emailId: this.state.emailId};
         console.log("employee => " + JSON.stringify(employee));
 
         EmployeeService.createEmployee(employee).then(res => {
-            this.props.history.push('/employees');
+            // this.props.history.push('/employees');
+            window.location.href="/employees";
         });
     }
 
@@ -57,7 +58,7 @@ export default class CreateEmployeeComponent extends Component {
                                     <input placeholder="Email Address" name="emailId" className="form-control" value={this.state.emailId} onChange={this.changeEmailIdHandler}/>
                                 </div>
                                 <div className="actionButtons">
-                                    <button className="btn btn-success" onClick={this.saveEmployee.bind(this)}>Save</button>
+                                    <button className="btn btn-success" onClick={this.saveEmployee}>Save</button>
                                     <Link className="btn btn-danger" to="/employees" style={{marginLeft: "10px"}}>Cancel</Link>
                                 </div>
                             </form>
@@ -65,6 +66,7 @@ export default class CreateEmployeeComponent extends Component {
                     </div>
                 </div>
             </div>
+            <FooterComponent />
         </div>
         )
     }

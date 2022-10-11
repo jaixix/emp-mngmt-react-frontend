@@ -10,8 +10,15 @@ import EmployeeService from '../services/EmployeeService'
         this.state = {
             employees : []
         }
-        this.addEmployee = this.addEmployee.bind(this)
+        this.addEmployee = this.addEmployee.bind(this);
+        this.editEmployee = this.editEmployee.bind(this);
     } 
+
+    editEmployee(id){
+        // const { history } = this.props;
+        // history.push(`/update-employee/${id}`);
+        window.location.href=`/update-employee/${id}`;
+    }
 
     componentDidMount(){
         EmployeeService.getEmployees().then((res) => {
@@ -33,7 +40,7 @@ import EmployeeService from '../services/EmployeeService'
         <div className="row">
             <table className="table table-striped table-bordered">
                 <thead>
-                    <tr>
+                    <tr className='text-center'>
                         <th>Employee First Name</th>
                         <th>Employee Last Name</th>
                         <th>Employee Email ID</th>
@@ -48,6 +55,10 @@ import EmployeeService from '../services/EmployeeService'
                                 <td>{employee.firstName}</td>
                                 <td>{employee.lastName}</td>
                                 <td>{employee.emailId}</td>
+                                <td>
+                                    <button onClick = {() => this.editEmployee(employee.id)}
+                                    className="btn btn-info">Update</button>
+                                </td>
                             </tr>
                         )
                     }
