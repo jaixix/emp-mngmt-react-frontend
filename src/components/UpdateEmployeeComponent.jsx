@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import EmployeeService from '../services/EmployeeService';
-import FooterComponent from './FooterComponent';
+// import FooterComponent from './FooterComponent';
 
 export default class UpdateEmployeeComponent extends Component {
 
@@ -9,7 +9,8 @@ export default class UpdateEmployeeComponent extends Component {
       super(props);
 
       this.state = {
-          id: this.props.match.params.id,
+        //   id: window.location.href.split('/').pop(),
+          id: '',
           firstName: '',
           lastName: '',
           emailId: ''
@@ -17,13 +18,16 @@ export default class UpdateEmployeeComponent extends Component {
   }
 
   componentDidMount(){
-    EmployeeService.getEmployeeById(this.state.id).then((res) => {
-      let employee = res.data;
-      this.setState({
-        firstName: employee.firstName,
-        lastName: employee.lastName,
-        emailId: employee.emailId
-      });
+    const url = new URLSearchParams(window.location.search);
+    this.setState({ id: url.get("id")}, () => {
+        EmployeeService.getEmployeeById(this.state.id).then((res) => {
+            let employee = res.data;
+            this.setState({
+              firstName: employee.firstName,
+              lastName: employee.lastName,
+              emailId: employee.emailId
+            });
+          });
     });
   }
 
@@ -31,10 +35,7 @@ export default class UpdateEmployeeComponent extends Component {
       let employee = {firstName: this.state.firstName, lastName: this.state.lastName,
           emailId: this.state.emailId};
       console.log("employee => " + JSON.stringify(employee));
-
-      // EmployeeService.createEmployee(employee).then(res => {
-      //     window.location.href="/employees";
-      // });
+      window.location.href="/employees";
   }
 
   changeFirstNameHandler = (event) => {
@@ -53,7 +54,7 @@ export default class UpdateEmployeeComponent extends Component {
           <div className="container">
               <div className="row">
                   <div className="card col-md-6 offset-md-3 offset-md-3">
-                      <h3 className="text-center">Add Employee</h3>
+                      <h3 className="text-center">Update Employee</h3>
                       <div className="card-body">
                           <form>
                               <div className="form-group">
@@ -77,7 +78,6 @@ export default class UpdateEmployeeComponent extends Component {
                   </div>
               </div>
           </div>
-          <FooterComponent />
       </div>
       )
   }

@@ -1,9 +1,8 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import ListEmployeeComponent from './components/ListEmployeeComponent';
 import HeaderComponent from './components/HeaderComponent';
-import FooterComponent from './components/FooterComponent';
 import CreateEmployeeComponent from './components/CreateEmployeeComponent';
 import UpdateEmployeeComponent from './components/UpdateEmployeeComponent';
 
@@ -17,10 +16,9 @@ function App() {
               <Route path="/" exact element= {<ListEmployeeComponent/>}></Route>
               <Route path="/employees" exact element= {<ListEmployeeComponent/>}></Route>
               <Route path="/add-employee" exact element= {<CreateEmployeeComponent/>}></Route>
-              <Route path="/update-employee/:id" exact element= {<UpdateEmployeeComponent />}></Route>
+              <Route path="/update-employee" exact element= {<UpdateEmployeeComponent />}></Route>
             </Routes>
           </div>
-        {/* <FooterComponent /> */}
       </Router>
     </div>
   );

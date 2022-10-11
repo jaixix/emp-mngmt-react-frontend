@@ -17,7 +17,7 @@ import EmployeeService from '../services/EmployeeService'
     editEmployee(id){
         // const { history } = this.props;
         // history.push(`/update-employee/${id}`);
-        window.location.href=`/update-employee/${id}`;
+        window.location.href=`/update-employee?id=${id}`;
     }
 
     componentDidMount(){
